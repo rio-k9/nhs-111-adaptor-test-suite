@@ -1,0 +1,62 @@
+{
+  "testList": [
+    {
+      "testName": "Create Emergency",
+      "testDescription": "This test will attempt to create an emergency request with adaptor... lorumlorumlorum",
+      "testSpecifications": [
+        {
+          "title": "Name",
+          "description": "Description",
+          "requestHeaderFields": [
+            {
+              "id": "content-type",
+              "defaultValue": "application/json",
+              "validators": {
+                "notNull": true,
+                "minLength": 0,
+                "maxLength": 0,
+                "regexMatch": ""
+              }
+            }
+          ],
+          "requestPayloadFields": [
+            {
+              "id": "name",
+              "defaultValue": "",
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "testName": "Update Emergency",
+      "testDescription": "This test will attempt to update an emergency request with adaptor... lorumlorumlorum",
+      "testSpecifications": [
+        {
+          "title": "Name",
+          "description": "Description",
+          "requestHeaderFields": [
+            {
+              "id": "content-type",
+              "defaultValue": "application/json",
+              "validators": {
+                "notNull": true,
+                "minLength": 0,
+                "maxLength": 0,
+                "regexMatch": ""
+              }
+            }
+          ],
+          "requestPayloadFields": [
+            {
+              "id": "name",
+              "defaultValue": "",
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

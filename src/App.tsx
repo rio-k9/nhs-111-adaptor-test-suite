@@ -4,12 +4,8 @@ import {
   BrowserRouter as Router,
   Routes as Switch,
 } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
-import Main from "./components/Main";
 import { routes } from "./routes";
-import Layout from "./components/Layout";
 
 function App() {
   return (

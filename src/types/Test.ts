@@ -1,9 +1,6 @@
-export interface TestList {
-  testList: Array<Test>;
-}
-
 export interface Test {
   testName: string;
+  testDescription: string;
   testSpecifications: Array<TestSpecs>;
 }
 
