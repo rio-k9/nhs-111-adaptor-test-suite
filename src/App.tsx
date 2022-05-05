@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes as Switch,
+} from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
+import Main from "./components/Main";
+import { routes } from "./routes";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        background: "#f0f4f5",
+      }}
+    >
+      <Router>
+        <Switch>
+          {routes.map((r) => (
+            <Route key={r.path} path={r.path} element={r.element} />
+          ))}
+          <Route path="*" element={<NotFound />} />
+        </Switch>
+      </Router>
     </div>
   );
 }
