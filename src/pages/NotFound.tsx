@@ -1,7 +1,6 @@
-import { Container } from "nhsuk-react-components";
 import React, { Fragment } from "react";
+import { Container } from "nhsuk-react-components";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
 import Layout from "../components/Layout";
 
 const NotFound = () => {

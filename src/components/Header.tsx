@@ -1,6 +1,5 @@
 import { Header as NhsHeader } from "nhsuk-react-components";
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import NavBar from "./NavBar";
 
 interface Props {

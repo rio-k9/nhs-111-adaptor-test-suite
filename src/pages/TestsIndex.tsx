@@ -1,59 +1,38 @@
 import { Container, ListPanel, Card } from "nhsuk-react-components";
 import React from "react";
 import Layout from "../components/Layout";
-import Main from "../components/Main";
+import schema from "../data/schema";
+interface TestIndex {
+  [key: string]: Array<string>;
+}
 
-interface Props {}
+const testIndex = schema.testList.reduce((acc: TestIndex, val, i) => {
+  const key: string = val.testName.substring(0, 1);
+  acc = {
+    ...acc,
+    [key]: key in acc ? [...acc[key], val.testName] : [val.testName],
+  };
+  return acc;
+}, {});
 
-const TestsIndex = ({}: Props) => {
+const TestsIndex = () => {
   return (
     <Layout>
       <ListPanel>
-        <ListPanel.Panel
-          label="A"
-          labelProps={{ id: "A" }}
-          backToTop
-          backToTopLink="#"
-        >
-          <ListPanel.LinkItem href="/conditions/abdominal-aortic-aneurysm/">
-            AAA
-          </ListPanel.LinkItem>
-          <ListPanel.LinkItem href="/conditions/abdominal-aortic-aneurysm/">
-            Abdominal aortic aneurysm
-          </ListPanel.LinkItem>
-          <ListPanel.LinkItem href="/conditions/abscess/">
-            Abscess
-          </ListPanel.LinkItem>
-        </ListPanel.Panel>
-        <ListPanel.Panel
-          label="C"
-          labelProps={{ id: "C" }}
-          backToTop
-          backToTopLink="#"
-        >
-          <ListPanel.LinkItem href="/conditions/chest-pain/">
-            Chest pain
-          </ListPanel.LinkItem>
-          <ListPanel.LinkItem href="/conditions/cold-sores/">
-            Cold sore
-          </ListPanel.LinkItem>
-        </ListPanel.Panel>
-        <ListPanel.Panel
-          label="D"
-          labelProps={{ id: "D" }}
-          backToTop
-          backToTopLink="#"
-        >
-          <ListPanel.LinkItem href="/conditions/dandruff/">
-            Dandruff
-          </ListPanel.LinkItem>
-          <ListPanel.LinkItem href="/conditions/dementia/">
-            Dementia
-          </ListPanel.LinkItem>
-          <ListPanel.LinkItem href="/conditions/toothache/">
-            Dental pain
-          </ListPanel.LinkItem>
-        </ListPanel.Panel>
+        {Object.entries(testIndex).map(([k, v]) => (
+          <ListPanel.Panel
+            label={k}
+            labelProps={{ id: k }}
+            backToTop
+            backToTopLink="#"
+          >
+            {v.map((name) => (
+              <ListPanel.LinkItem href="/conditions/abdominal-aortic-aneurysm/">
+                {name}
+              </ListPanel.LinkItem>
+            ))}
+          </ListPanel.Panel>
+        ))}
       </ListPanel>
     </Layout>
   );

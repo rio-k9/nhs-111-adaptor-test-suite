@@ -11,9 +11,20 @@ const schema: Schema = {
         description: "Description",
         requestHeaderFields: [
           {
+            label: "Url",
+            id: "url",
+            defaultValue: "localhost:8081/report",
+            validators: {
+              notNull: true,
+              minLength: 0,
+              maxLength: 0,
+              regexMatch: "",
+            },
+          },
+          {
             label: "Content Type",
             id: "content-type",
-            defaultValue: "application/json",
+            defaultValue: "text/xml",
             validators: {
               notNull: true,
               minLength: 0,
