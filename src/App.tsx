@@ -1,10 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Route,
   BrowserRouter as Router,
   Routes as Switch,
 } from "react-router-dom";
-import NotFound from "./pages/NotFound";
 import { routes } from "./routes";
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
           {routes.map((r) => (
             <Route key={r.path} path={r.path} element={r.element} />
           ))}
-          <Route path="*" element={<NotFound />} />
         </Switch>
       </Router>
     </div>

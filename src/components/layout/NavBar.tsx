@@ -7,19 +7,21 @@ const NavBar = () => {
 
   return (
     <NhsHeader.Nav>
-      {routes.map((r) => (
-        <NhsHeader.NavItem
-          key={"K-" + r.path}
-          href={r.path}
-          onMouseEnter={() => setNavItemHovered(r.path)}
-          onMouseLeave={() => setNavItemHovered(null)}
-          style={{
-            textDecoration: navItemHovered === r.path ? "none" : "underline",
-          }}
-        >
-          {r.name}
-        </NhsHeader.NavItem>
-      ))}
+      {routes
+        .filter((r) => r.nav)
+        .map((r) => (
+          <NhsHeader.NavItem
+            key={"K-" + r.path}
+            href={r.path}
+            onMouseEnter={() => setNavItemHovered(r.path)}
+            onMouseLeave={() => setNavItemHovered(null)}
+            style={{
+              textDecoration: navItemHovered === r.path ? "none" : "underline",
+            }}
+          >
+            {r.name}
+          </NhsHeader.NavItem>
+        ))}
     </NhsHeader.Nav>
   );
 };
