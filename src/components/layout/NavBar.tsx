@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Header as NhsHeader } from "nhsuk-react-components";
-import { routes } from "../routes";
+import { routes } from "../../routes";
 
 const NavBar = () => {
   const [navItemHovered, setNavItemHovered] = useState<String | null>();
