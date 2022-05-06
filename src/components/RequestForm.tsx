@@ -26,9 +26,9 @@ const RequestForm = ({ specs }: Props) => {
     <Card>
       <Card.Content>
         <Row>
-          {Object.entries(specs).map(([k, v]) => {
-            if (Array.isArray(v)) {
-              return (
+          {Object.entries(specs).map(
+            ([k, v]) =>
+              Array.isArray(v) && (
                 <Col width="one-half" key={"K-" + k}>
                   {v.map((f: TestRequestField) => (
                     <Input
@@ -43,9 +43,8 @@ const RequestForm = ({ specs }: Props) => {
                     />
                   ))}
                 </Col>
-              );
-            }
-          })}
+              )
+          )}
           <Col
             width="full"
             style={{

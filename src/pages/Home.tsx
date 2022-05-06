@@ -2,9 +2,7 @@ import React from "react";
 import { Col, Row } from "nhsuk-react-components";
 import Layout from "../components/Layout";
 import TestCard from "../components/TestCard";
-import getSchema from "../utils/getSchema";
-
-const schema = getSchema();
+import schema from "../data/schema";
 
 const Home = () => {
   return (
