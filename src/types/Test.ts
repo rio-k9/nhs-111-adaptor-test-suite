@@ -1,24 +1,19 @@
 export interface Test {
   testName: string;
   testDescription: string;
-  testSpecifications: Array<TestSpecs>;
+  testSpecifications: TestSpecs;
 }
 
-interface TestSpecs {
+export interface TestSpecs {
   title: string;
   description: string;
-  requestHeaderFields: Array<TestHeaderField>;
-  requestPayloadFields: Array<TestPayloadField>;
+  requestHeaderFields: Array<TestRequestField>;
+  requestPayloadFields: Array<TestRequestField>;
 }
 
-interface TestHeaderField {
+export interface TestRequestField {
   id: string;
-  defaultValue: string;
-  validators?: TestFieldValidators;
-}
-
-interface TestPayloadField {
-  id: string;
+  label: string;
   defaultValue: string;
   validators?: TestFieldValidators;
 }

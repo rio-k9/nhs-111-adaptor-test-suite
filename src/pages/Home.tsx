@@ -1,12 +1,10 @@
-import { Card, Col, Container, Details, Row } from "nhsuk-react-components";
 import React from "react";
+import { Col, Row } from "nhsuk-react-components";
 import Layout from "../components/Layout";
 import TestCard from "../components/TestCard";
-import json from "../data/schema.json";
-import Schema from "../types/Schema";
-import shallowCopy from "../utils/shallowCopy";
+import getSchema from "../utils/getSchema";
 
-const schema: Schema = shallowCopy(json);
+const schema = getSchema();
 
 const Home = () => {
   return (

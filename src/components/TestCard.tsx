@@ -16,7 +16,7 @@ const TestCard = ({ data }: Props) => {
         <Details expander>
           <Details.Summary>Run test</Details.Summary>
           <Details.Text>
-            <RequestForm />
+            <RequestForm specs={data.testSpecifications} />
           </Details.Text>
         </Details>
       </Card.Content>
