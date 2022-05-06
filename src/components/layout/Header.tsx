@@ -1,5 +1,5 @@
-import { Header as NhsHeader } from "nhsuk-react-components";
 import React from "react";
+import { Header as NhsHeader } from "nhsuk-react-components";
 import NavBar from "./NavBar";
 
 interface Props {

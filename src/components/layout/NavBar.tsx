@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import { Header as NhsHeader } from "nhsuk-react-components";
+import { routes } from "../routes";
 
 const NavBar = () => {
   const [navItemHovered, setNavItemHovered] = useState<String | null>();
 
   return (
     <NhsHeader.Nav>
-      {[
-        {
-          href: "/",
-          page: "Home",
-        },
-        {
-          href: "/tests",
-          page: "Tests A-Z",
-        },
-      ].map((p) => (
+      {routes.map((r) => (
         <NhsHeader.NavItem
-          key={"K-" + p.href}
-          href={p.href}
-          onMouseEnter={() => setNavItemHovered(p.href)}
+          key={"K-" + r.path}
+          href={r.path}
+          onMouseEnter={() => setNavItemHovered(r.path)}
           onMouseLeave={() => setNavItemHovered(null)}
           style={{
-            textDecoration: navItemHovered === p.href ? "none" : "underline",
+            textDecoration: navItemHovered === r.path ? "none" : "underline",
           }}
         >
-          {p.page}
+          {r.name}
         </NhsHeader.NavItem>
       ))}
     </NhsHeader.Nav>

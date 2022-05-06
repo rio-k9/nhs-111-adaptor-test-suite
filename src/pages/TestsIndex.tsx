@@ -1,7 +1,8 @@
-import { Container, ListPanel, Card } from "nhsuk-react-components";
+import { ListPanel } from "nhsuk-react-components";
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import schema from "../data/schema";
+
 interface TestIndex {
   [key: string]: Array<string>;
 }

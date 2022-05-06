@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "nhsuk-react-components";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import TestCard from "../components/TestCard";
 import schema from "../data/schema";
 
