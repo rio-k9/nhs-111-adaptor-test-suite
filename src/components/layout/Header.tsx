@@ -2,9 +2,9 @@ import React from "react";
 import { Header as NhsHeader } from "nhsuk-react-components";
 import NavBar from "./NavBar";
 
-interface Props {
+type Props = {
   hideNav?: Boolean;
-}
+};
 const Header = ({ hideNav }: Props) => {
   return (
     <NhsHeader transactional>

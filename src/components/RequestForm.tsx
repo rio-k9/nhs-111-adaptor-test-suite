@@ -2,14 +2,18 @@ import React, { ChangeEvent, useState } from "react";
 import { Button, Card, Col, Input, Row } from "nhsuk-react-components";
 import AdaptorRequest, { RequestBody, RequestHeaders } from "../types/Request";
 import { TestRequestField, TestSpecs } from "../types/Test";
-import createDefaultRequest from "../createForm";
+import createDefaultRequest from "../utils/createDefaultRequest";
+import createFormErrors from "../utils/createFormErrors";
 
 type Props = {
   specs: TestSpecs;
+  name: string;
 };
 
-const RequestForm = ({ specs }: Props) => {
+const RequestForm = ({ specs, name }: Props) => {
   const [form, setForm] = useState<AdaptorRequest>(createDefaultRequest(specs));
+  const [errors, setErrors] = useState(createFormErrors(specs));
+
   const specEntries = Object.entries(specs);
 
   const onReset = () => {
@@ -17,8 +21,10 @@ const RequestForm = ({ specs }: Props) => {
   };
 
   const onSubmit = () => {
-    console.log(form);
+    console.log(errors);
   };
+
+  const validateField = (field: string, value: string) => null;
 
   return (
     <Card>
@@ -26,19 +32,19 @@ const RequestForm = ({ specs }: Props) => {
         {specEntries.map(
           ([k, v]: [string, Array<TestRequestField>], i) =>
             Array.isArray(v) && (
-              <Row>
+              <Row key={"K-" + name + k}>
                 {v.map((f: TestRequestField) => {
                   const key = k as keyof AdaptorRequest;
                   const field = f.id as keyof (RequestBody | RequestHeaders);
                   return (
-                    <Col width="one-half" key={"K-" + k}>
+                    <Col width="one-half" key={"K-" + name + key + field}>
                       <Input
-                        key={"K+" + f.id}
                         id={f.id}
                         name={f.id}
                         label={f.label}
                         value={form[key][field]}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          validateField(f.id, e.target.value);
                           setForm({
                             ...form,
                             [key]: {

@@ -4,9 +4,9 @@ import schema from "../data/schema";
 import { Test } from "../types/Test";
 import { ListPanel } from "nhsuk-react-components";
 
-interface TestIndex {
+type TestIndex = {
   [key: string]: Array<string>;
-}
+};
 
 const testIndex = schema.testList.reduce((acc: TestIndex, val: Test) => {
   const key: string = val.testName.substring(0, 1);

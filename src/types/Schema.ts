@@ -1,5 +1,6 @@
 import { Test } from "./Test";
 
-export default interface Schema {
+type Schema = {
   testList: Array<Test>;
-}
+};
+export default Schema;

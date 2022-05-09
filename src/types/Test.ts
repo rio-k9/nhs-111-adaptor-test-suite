@@ -1,8 +1,8 @@
-export interface Test {
+export type Test = {
   testName: string;
   testDescription: string;
   testSpecifications: TestSpecs;
-}
+};
 
 export interface TestSpecs {
   title: string;
@@ -11,16 +11,31 @@ export interface TestSpecs {
   requestPayloadFields: Array<TestRequestField>;
 }
 
-export interface TestRequestField {
+export type TestRequestField = {
   id: string;
   label: string;
   defaultValue: string;
-  validators?: TestFieldValidators;
-}
+  validators?: Array<Validator>;
+};
 
-interface TestFieldValidators {
-  notNull?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  regexMatch?: string;
-}
+export type Validator = {
+  id: ValidatorKeys;
+  message: string;
+  match: ValidatorMatch;
+};
+
+export type ValidatorMatch = boolean | string | number | null;
+
+export type ValidatorKeys =
+  | "maxLength"
+  | "minLength"
+  | "notNull"
+  | "regexMatch";
+
+export type FormErrors = {
+  [key: string]: FormError | null;
+};
+
+export type FormError = {
+  [key in ValidatorKeys]: Validator & { error: boolean };
+};
