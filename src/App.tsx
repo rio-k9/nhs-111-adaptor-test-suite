@@ -5,6 +5,7 @@ import {
   Routes as Switch,
 } from "react-router-dom";
 import { routes } from "./routes";
+import { AppRoute } from "./types/Route";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
     >
       <Router>
         <Switch>
-          {routes.map((r) => (
+          {routes.map((r: AppRoute) => (
             <Route key={r.path} path={r.path} element={r.element} />
           ))}
         </Switch>

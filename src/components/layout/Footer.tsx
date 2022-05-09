@@ -1,9 +1,7 @@
+import React from "react";
 import { Footer as NhsFooter } from "nhsuk-react-components";
-import React, { useState } from "react";
 
-interface Props {}
-
-const Footer = ({}: Props) => {
+const Footer = () => {
   return (
     <NhsFooter>
       <NhsFooter.List>

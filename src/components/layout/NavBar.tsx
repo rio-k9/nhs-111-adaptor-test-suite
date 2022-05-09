@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Header as NhsHeader } from "nhsuk-react-components";
 import { routes } from "../../routes";
+import { AppRoute } from "../../types/Route";
 
 const NavBar = () => {
   const [navItemHovered, setNavItemHovered] = useState<String | null>();
@@ -8,8 +9,8 @@ const NavBar = () => {
   return (
     <NhsHeader.Nav>
       {routes
-        .filter((r) => r.nav)
-        .map((r) => (
+        .filter((r: AppRoute) => r.nav)
+        .map((r: AppRoute) => (
           <NhsHeader.NavItem
             key={"K-" + r.path}
             href={r.path}
