@@ -1,6 +1,12 @@
 import { RequestHeaderProps } from "../types/Request";
 import Schema from "../types/Schema";
-import { maxLength, minLength, notNull, regexMatch } from "../utils/validators";
+import {
+  isAlpha,
+  isLocalUrl,
+  maxLength,
+  minLength,
+  notNull,
+} from "../utils/validators";
 
 const schema: Schema = {
   testList: [
@@ -16,26 +22,21 @@ const schema: Schema = {
             label: "Url",
             id: "url",
             defaultValue: "localhost:8081/report",
-            validators: [notNull()],
+            validators: [notNull(), isLocalUrl()],
           },
           {
             label: "Content Type",
             id: "content-type",
             defaultValue: "text/xml",
-            validators: [
-              notNull(),
-              minLength(0),
-              maxLength(10),
-              regexMatch("", ""),
-            ],
+            validators: [notNull(), minLength(2), maxLength(10)],
           },
         ],
         [RequestHeaderProps.Body]: [
           {
             label: "Name",
             id: "name",
-            defaultValue: "",
-            validators: [notNull()],
+            defaultValue: "John",
+            validators: [notNull(), isAlpha()],
           },
         ],
       },
@@ -52,26 +53,21 @@ const schema: Schema = {
             label: "Url",
             id: "url",
             defaultValue: "localhost:8081/report",
-            validators: [notNull()],
+            validators: [isLocalUrl()],
           },
           {
             label: "Content Type",
             id: "content-type",
             defaultValue: "text/xml",
-            validators: [
-              notNull(),
-              minLength(0),
-              maxLength(10),
-              regexMatch("", ""),
-            ],
+            validators: [notNull(), minLength(2), maxLength(10)],
           },
         ],
-        requestPayloadFields: [
+        [RequestHeaderProps.Body]: [
           {
             label: "Name",
             id: "name",
-            defaultValue: "",
-            validators: [notNull()],
+            defaultValue: "John",
+            validators: [notNull(), isAlpha()],
           },
         ],
       },

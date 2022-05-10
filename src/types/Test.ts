@@ -19,12 +19,13 @@ export type TestRequestField = {
 };
 
 export type Validator = {
+  precedence: number;
   id: ValidatorKeys;
   message: string;
   match: ValidatorMatch;
 };
 
-export type ValidatorMatch = boolean | string | number | null;
+export type ValidatorMatch = boolean | string | number | null | RegExp;
 
 export type ValidatorKeys =
   | "maxLength"

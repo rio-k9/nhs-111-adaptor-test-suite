@@ -1,7 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button, Card, Col, Input, Row } from "nhsuk-react-components";
 import AdaptorRequest, { RequestBody, RequestHeaders } from "../types/Request";
-import { TestRequestField, TestSpecs } from "../types/Test";
+import {
+  FormError,
+  FormErrors,
+  TestRequestField,
+  TestSpecs,
+} from "../types/Test";
 import createDefaultRequest from "../utils/createDefaultRequest";
 import createFormErrors from "../utils/createFormErrors";
 
@@ -12,19 +17,60 @@ type Props = {
 
 const RequestForm = ({ specs, name }: Props) => {
   const [form, setForm] = useState<AdaptorRequest>(createDefaultRequest(specs));
-  const [errors, setErrors] = useState(createFormErrors(specs));
+  const [errors, setErrors] = useState<FormErrors>(createFormErrors(specs));
 
   const specEntries = Object.entries(specs);
 
   const onReset = () => {
     setForm(createDefaultRequest(specs));
+    setErrors(createFormErrors(specs));
   };
 
-  const onSubmit = () => {
-    console.log(errors);
+  const onSubmit = () => {};
+
+  const validateField = (field: string, value: string) => {
+    let validatedErrors = errors;
+    const fieldValidation = validatedErrors[field];
+    if (fieldValidation) {
+      validatedErrors[field] = Object.entries(fieldValidation).reduce(
+        (acc, [k, v]) => {
+          let isError = false;
+          if (k === "notNull") {
+            isError = value === null || value === "";
+          } else if (k === "maxLength") {
+            isError = typeof v.match === "number" && value.length > v.match;
+          } else if (k === "minLength") {
+            isError = typeof v.match === "number" && value.length < v.match;
+          } else if (k === "regexMatch") {
+            isError =
+              v.match instanceof RegExp && !new RegExp(v.match).test(value);
+          }
+          return {
+            ...acc,
+            [k]: {
+              ...v,
+              error: isError,
+            },
+          };
+        },
+        {} as FormError
+      );
+    }
+    setErrors(validatedErrors);
   };
 
-  const validateField = (field: string, value: string) => null;
+  const inputError = (field: string) => {
+    const fieldValidation = errors[field];
+    const errorMessage =
+      !!fieldValidation &&
+      Object.entries(fieldValidation)
+        .sort((x, y) => y[1].precedence - x[1].precedence)
+        .reduce(
+          (acc, [k, v]) => (v.error ? v.message : acc),
+          undefined as undefined | string
+        );
+    return errorMessage;
+  };
 
   return (
     <Card>
@@ -43,6 +89,7 @@ const RequestForm = ({ specs, name }: Props) => {
                         name={f.id}
                         label={f.label}
                         value={form[key][field]}
+                        error={inputError(field)}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                           validateField(f.id, e.target.value);
                           setForm({
