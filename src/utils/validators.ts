@@ -1,4 +1,4 @@
-import { Validator, ValidatorKeys } from "../types/Test";
+import { Validator, ValidatorKeys } from "../types";
 
 export const notNull = (): Validator => ({
   precedence: 0,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Details } from "nhsuk-react-components";
-import { Test } from "../types/Test";
 import RequestForm from "./RequestForm";
+import { Test } from "../types";
 
 interface Props {
   data: Test;

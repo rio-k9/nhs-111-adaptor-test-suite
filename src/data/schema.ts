@@ -1,5 +1,4 @@
-import { RequestHeaderProps } from "../types/Request";
-import Schema from "../types/Schema";
+import { RequestHeaderProps, Schema } from "../types";
 import {
   isAlpha,
   isLocalUrl,

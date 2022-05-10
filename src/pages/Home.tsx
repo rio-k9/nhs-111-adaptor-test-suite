@@ -3,7 +3,7 @@ import { Col, Row } from "nhsuk-react-components";
 import Layout from "../components/layout";
 import TestCard from "../components/TestCard";
 import schema from "../data/schema";
-import { Test } from "../types/Test";
+import { Test } from "../types";
 
 const Home = () => {
   return (

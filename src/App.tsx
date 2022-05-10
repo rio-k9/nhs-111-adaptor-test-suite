@@ -5,7 +5,7 @@ import {
   Routes as Switch,
 } from "react-router-dom";
 import { routes } from "./routes";
-import { AppRoute } from "./types/Route";
+import { AppRoute } from "./types";
 
 function App() {
   return (

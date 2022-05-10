@@ -1,14 +1,17 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button, Card, Col, Input, Row } from "nhsuk-react-components";
-import AdaptorRequest, { RequestBody, RequestHeaders } from "../types/Request";
 import {
+  AdaptorRequest,
   FormError,
   FormErrors,
+  RequestBody,
+  RequestHeaders,
   TestRequestField,
   TestSpecs,
-} from "../types/Test";
+} from "../types";
 import createDefaultRequest from "../utils/createDefaultRequest";
 import createFormErrors from "../utils/createFormErrors";
+import sendXmlRequest from "../utils/sendXmlRequest";
 
 type Props = {
   specs: TestSpecs;
@@ -26,7 +29,9 @@ const RequestForm = ({ specs, name }: Props) => {
     setErrors(createFormErrors(specs));
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    sendXmlRequest();
+  };
 
   const validateField = (field: string, value: string) => {
     let validatedErrors = errors;

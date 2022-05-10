@@ -1,7 +1,7 @@
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import TestsIndex from "../pages/TestsIndex";
-import AppRoutes from "../types/Route";
+import { AppRoutes } from "../types";
 
 export const routes: AppRoutes = [
   {

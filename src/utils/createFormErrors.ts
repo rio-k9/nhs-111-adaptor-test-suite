@@ -1,5 +1,4 @@
-import { RequestHeaderProps } from "../types/Request";
-import { FormError, FormErrors, TestSpecs } from "../types/Test";
+import { FormError, FormErrors, RequestHeaderProps, TestSpecs } from "../types";
 
 const createFormErrors = (specs: TestSpecs): FormErrors => {
   return [RequestHeaderProps.Body, RequestHeaderProps.Header].reduce(

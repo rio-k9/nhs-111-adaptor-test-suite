@@ -1,9 +1,10 @@
-import AdaptorRequest, {
+import {
+  AdaptorRequest,
   RequestBody,
   RequestHeaderProps,
   RequestHeaders,
-} from "../types/Request";
-import { TestSpecs } from "../types/Test";
+  TestSpecs,
+} from "../types";
 
 const createDefaultRequest = (specs: TestSpecs): AdaptorRequest =>
   [RequestHeaderProps.Header, RequestHeaderProps.Body].reduce((acc, val) => {
