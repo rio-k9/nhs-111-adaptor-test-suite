@@ -31,6 +31,9 @@ export type ValidatorKeys =
   | "maxLength"
   | "minLength"
   | "notNull"
+  | "alphaMatch"
+  | "localMatch"
+  | "reportMatch"
   | "regexMatch";
 
 export type FormErrors = {

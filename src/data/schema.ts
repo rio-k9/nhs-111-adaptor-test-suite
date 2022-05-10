@@ -3,6 +3,7 @@ import Schema from "../types/Schema";
 import {
   isAlpha,
   isLocalUrl,
+  isReportUrl,
   maxLength,
   minLength,
   notNull,
@@ -53,7 +54,7 @@ const schema: Schema = {
             label: "Url",
             id: "url",
             defaultValue: "localhost:8081/report",
-            validators: [isLocalUrl()],
+            validators: [isLocalUrl(), isReportUrl()],
           },
           {
             label: "Content Type",

@@ -1,4 +1,4 @@
-import { Validator } from "../types/Test";
+import { Validator, ValidatorKeys } from "../types/Test";
 
 export const notNull = (): Validator => ({
   precedence: 0,
@@ -21,18 +21,36 @@ export const minLength = (int: number): Validator => ({
   message: `This field has a minimum length of ${int}`,
 });
 
-export const regexMatch = (regexp: RegExp, message: string): Validator => ({
-  precedence: 1,
-  id: "regexMatch",
+export const regexMatch = (
+  regexp: RegExp,
+  message: string,
+  id: ValidatorKeys = "regexMatch" as const,
+  precedence = 1
+): Validator => ({
+  precedence,
+  id,
   match: regexp,
   message: message,
 });
 
 export const isLocalUrl = () =>
   regexMatch(
-    /((localhost|127.0.0.1)(([:])[\0-9]{4})\/){1}/g,
-    "Field must be a local URL"
+    /((localhost|127.0.0.1)(([:])[\0-9]{4,6})(\/){1}){1}/g,
+    "Field must be a local URL",
+    "localMatch" as const
+  );
+
+export const isReportUrl = () =>
+  regexMatch(
+    /((report)){1}/g,
+    "Field must use the /report subdirectory",
+    "reportMatch" as const,
+    2
   );
 
 export const isAlpha = () =>
-  regexMatch(/^[A-Za-z]+$/, "Field must be alphabetical");
+  regexMatch(
+    /^[A-Za-z]+$/,
+    "Field must be alphabetical",
+    "alphaMatch" as const
+  );

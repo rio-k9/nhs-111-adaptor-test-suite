@@ -41,7 +41,7 @@ const RequestForm = ({ specs, name }: Props) => {
             isError = typeof v.match === "number" && value.length > v.match;
           } else if (k === "minLength") {
             isError = typeof v.match === "number" && value.length < v.match;
-          } else if (k === "regexMatch") {
+          } else {
             isError =
               v.match instanceof RegExp && !new RegExp(v.match).test(value);
           }
