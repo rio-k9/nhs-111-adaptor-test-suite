@@ -3,7 +3,6 @@ import {
   isAlpha,
   isLocalUrl,
   isReportUrl,
-  maxLength,
   minLength,
   notNull,
 } from "../utils/validators";
@@ -21,14 +20,14 @@ const schema: Schema = {
           {
             label: "Url",
             id: "url",
-            defaultValue: "localhost:8081/report",
-            validators: [notNull(), isLocalUrl()],
+            defaultValue: "http://localhost:8081/report",
+            validators: [notNull(), isLocalUrl(), isReportUrl()],
           },
           {
             label: "Content Type",
             id: "content-type",
-            defaultValue: "text/xml",
-            validators: [notNull(), minLength(2), maxLength(10)],
+            defaultValue: "application/xml",
+            validators: [notNull(), minLength(7)],
           },
         ],
         [RequestHeaderProps.Body]: [
@@ -48,18 +47,18 @@ const schema: Schema = {
       testSpecifications: {
         title: "Name",
         description: "Description",
-        requestHeaderFields: [
+        [RequestHeaderProps.Header]: [
           {
             label: "Url",
             id: "url",
-            defaultValue: "localhost:8081/report",
+            defaultValue: "http://localhost:8081/report",
             validators: [isLocalUrl(), isReportUrl()],
           },
           {
             label: "Content Type",
             id: "content-type",
-            defaultValue: "text/xml",
-            validators: [notNull(), minLength(2), maxLength(10)],
+            defaultValue: "application/xml",
+            validators: [notNull(), minLength(7)],
           },
         ],
         [RequestHeaderProps.Body]: [

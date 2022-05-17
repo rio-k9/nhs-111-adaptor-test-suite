@@ -11,7 +11,7 @@ import {
 } from "../types";
 import createDefaultRequest from "../utils/createDefaultRequest";
 import createFormErrors from "../utils/createFormErrors";
-import sendXmlRequest from "../utils/sendXmlRequest";
+import sendXmlRequest, { AdaptorResponse } from "../utils/sendXmlRequest";
 
 type Props = {
   specs: TestSpecs;
@@ -21,16 +21,19 @@ type Props = {
 const RequestForm = ({ specs, name }: Props) => {
   const [form, setForm] = useState<AdaptorRequest>(createDefaultRequest(specs));
   const [errors, setErrors] = useState<FormErrors>(createFormErrors(specs));
+  const [response, setResponse] = useState<AdaptorResponse | null>(null);
 
   const specEntries = Object.entries(specs);
 
   const onReset = () => {
     setForm(createDefaultRequest(specs));
     setErrors(createFormErrors(specs));
+    setResponse(null);
   };
 
-  const onSubmit = () => {
-    sendXmlRequest();
+  const onSubmit = async () => {
+    const response = await sendXmlRequest(form);
+    setResponse(response);
   };
 
   const validateField = (field: string, value: string) => {
@@ -130,6 +133,21 @@ const RequestForm = ({ specs, name }: Props) => {
                 )}
               </Row>
             )
+        )}
+        {response && (
+          <Card>
+            <Card.Content>
+              <pre>Response Status: {response.status}</pre>
+              <pre
+                style={{
+                  overflow: "scroll",
+                  maxHeight: "450px",
+                }}
+              >
+                {response.xml}
+              </pre>
+            </Card.Content>
+          </Card>
         )}
       </Card.Content>
     </Card>
