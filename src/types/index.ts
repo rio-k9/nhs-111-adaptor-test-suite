@@ -1,7 +1,35 @@
 import { ReactNode } from "react";
 
 export type Schema = {
+  testGroups: Array<TestGroup>;
+};
+
+type TestGroup = {
+  groupName: string;
   testList: Array<Test>;
+};
+
+export type Test = {
+  testName: string;
+  testDescription: string;
+  template: string;
+  testSpecifications: TestSpecs;
+};
+
+export type TestIndex = {
+  [key: string]: Array<string>;
+};
+
+export interface TestSpecs {
+  requestHeaderFields: Array<TestRequestField>;
+  requestPayloadFields: Array<TestRequestField>;
+}
+
+export type TestRequestField = {
+  id: string;
+  label: string;
+  defaultValue: string;
+  validators?: Array<Validator>;
 };
 
 export type AppRoute = {
@@ -38,30 +66,6 @@ export enum RequestHeaderProps {
   Body = "requestPayloadFields",
 }
 
-export type Test = {
-  testName: string;
-  testDescription: string;
-  testSpecifications: TestSpecs;
-};
-
-export type TestIndex = {
-  [key: string]: Array<string>;
-};
-
-export interface TestSpecs {
-  title: string;
-  description: string;
-  requestHeaderFields: Array<TestRequestField>;
-  requestPayloadFields: Array<TestRequestField>;
-}
-
-export type TestRequestField = {
-  id: string;
-  label: string;
-  defaultValue: string;
-  validators?: Array<Validator>;
-};
-
 export type Validator = {
   precedence: number;
   id: ValidatorKeys;
@@ -78,7 +82,9 @@ export type ValidatorKeys =
   | "alphaMatch"
   | "localMatch"
   | "reportMatch"
-  | "regexMatch";
+  | "regexMatch"
+  | "isLength"
+  | "numericMatch";
 
 export type FormErrors = {
   [key: string]: FormError | null;

@@ -14,11 +14,12 @@ import createFormErrors from "../utils/createFormErrors";
 import sendXmlRequest, { AdaptorResponse } from "../utils/sendXmlRequest";
 
 type Props = {
-  specs: TestSpecs;
   name: string;
+  specs: TestSpecs;
+  template: string;
 };
 
-const RequestForm = ({ specs, name }: Props) => {
+const RequestForm = ({ name, specs, template }: Props) => {
   const [form, setForm] = useState<AdaptorRequest>(createDefaultRequest(specs));
   const [errors, setErrors] = useState<FormErrors>(createFormErrors(specs));
   const [response, setResponse] = useState<AdaptorResponse | null>(null);
@@ -32,7 +33,7 @@ const RequestForm = ({ specs, name }: Props) => {
   };
 
   const onSubmit = async () => {
-    const response = await sendXmlRequest(form);
+    const response = await sendXmlRequest(form, template);
     setResponse(response);
   };
 
@@ -49,6 +50,8 @@ const RequestForm = ({ specs, name }: Props) => {
             isError = typeof v.match === "number" && value.length > v.match;
           } else if (k === "minLength") {
             isError = typeof v.match === "number" && value.length < v.match;
+          } else if (k === "hasLength") {
+            isError = typeof v.match === "number" && value.length === v.match;
           } else {
             isError =
               v.match instanceof RegExp && !new RegExp(v.match).test(value);

@@ -4,19 +4,23 @@ import RequestForm from "./RequestForm";
 import { Test } from "../types";
 
 interface Props {
-  data: Test;
+  test: Test;
 }
 
-const TestCard = ({ data }: Props) => {
+const TestCard = ({ test }: Props) => {
   return (
     <Card feature>
       <Card.Content>
-        <Card.Heading>{data.testName}</Card.Heading>
-        <Card.Description>{data.testDescription}</Card.Description>
+        <Card.Heading>{test.testName}</Card.Heading>
+        <Card.Description>{test.testDescription}</Card.Description>
         <Details expander>
           <Details.Summary>Run test</Details.Summary>
           <Details.Text>
-            <RequestForm specs={data.testSpecifications} name={data.testName} />
+            <RequestForm
+              specs={test.testSpecifications}
+              name={test.testName}
+              template={test.template}
+            />
           </Details.Text>
         </Details>
       </Card.Content>

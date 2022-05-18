@@ -8,13 +8,15 @@ import { Test } from "../types";
 const Home = () => {
   return (
     <Layout>
-      <Row>
-        {schema.testList.map((t: Test) => (
-          <Col key={"K-" + t.testName} width="full">
-            <TestCard data={t} />
-          </Col>
-        ))}
-      </Row>
+      {schema.testGroups.map(({ testList, groupName }) => (
+        <Row key={"K-" + groupName}>
+          {testList.map((t: Test) => (
+            <Col key={"K-" + t.testName} width="full">
+              <TestCard test={t} />
+            </Col>
+          ))}
+        </Row>
+      ))}
     </Layout>
   );
 };

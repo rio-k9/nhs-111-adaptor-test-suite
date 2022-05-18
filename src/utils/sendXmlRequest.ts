@@ -1,5 +1,4 @@
 import { AdaptorRequest } from "../types";
-import reportXml from "../data/create-report-request.xml";
 const beautify = require("xml-beautifier");
 
 export type AdaptorResponse = {
@@ -8,9 +7,10 @@ export type AdaptorResponse = {
 };
 
 const sendXmlRequest = async (
-  form: AdaptorRequest
+  form: AdaptorRequest,
+  template: string
 ): Promise<AdaptorResponse> => {
-  const reportReq = await fetch(reportXml);
+  const reportReq = await fetch(template);
   const xml = await reportReq.text();
   return new Promise((res) => {
     var xhr = new XMLHttpRequest();
@@ -20,6 +20,15 @@ const sendXmlRequest = async (
       form.requestHeaderFields["content-type"]
     );
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    const xmlPayload = Object.entries(form.requestPayloadFields).reduce(
+      (acc, [k, v]) => {
+        const templateKey = `%${k.toUpperCase()}%`;
+        console.log(templateKey);
+        const newXml = acc.replace(templateKey, v);
+        return newXml;
+      },
+      xml
+    );
     xhr.onreadystatechange = function () {
       if (this.readyState === XMLHttpRequest.DONE) {
         res({
@@ -28,7 +37,8 @@ const sendXmlRequest = async (
         });
       }
     };
-    xhr.send(xml);
+    console.log(xmlPayload);
+    xhr.send(xmlPayload);
   });
 };
 

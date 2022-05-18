@@ -8,6 +8,7 @@ import {
 
 const createDefaultRequest = (specs: TestSpecs): AdaptorRequest =>
   [RequestHeaderProps.Header, RequestHeaderProps.Body].reduce((acc, val) => {
+    // Flatten test specs into key:value containing default input
     return {
       ...acc,
       [val]: specs[val].reduce(

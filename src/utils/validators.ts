@@ -21,6 +21,13 @@ export const minLength = (int: number): Validator => ({
   message: `This field has a minimum length of ${int}`,
 });
 
+export const isLength = (int: number): Validator => ({
+  precedence: 2,
+  id: "isLength",
+  match: int,
+  message: `This field requires a length of ${int}`,
+});
+
 export const regexMatch = (
   regexp: RegExp,
   message: string,
@@ -54,3 +61,6 @@ export const isAlpha = () =>
     "Field must be alphabetical",
     "alphaMatch" as const
   );
+
+export const isNumeric = () =>
+  regexMatch(/^[0-9 ]*$/, "Field must be numeric", "numericMatch" as const);
